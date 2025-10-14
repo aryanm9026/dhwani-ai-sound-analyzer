@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%; /* Near black */
+    --foreground: 0 0% 98%; /* Off-white */
+
+    --card: 0 0% 10%; /* Dark gray */
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 10%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%; /* White for primary buttons */
+    --primary-foreground: 0 0% 9%; /* Black text on primary buttons */
+
+    --secondary: 0 0% 12%; /* Lighter gray for secondary elements */
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 64%; /* Medium gray for muted text */
+
+    --accent: 0 0% 98%; /* Same as primary */
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84% 60%; /* Note: Kept red for usability, common practice */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 20%; /* Gray for borders */
+    --input: 0 0% 12%;
+    --ring: 0 0% 64%; /* Gray for focus rings */
+
+    --radius: 0.75rem;
+
+    /* Removed or simplified gradients and shadows for a flat look */
+    --gradient-primary: 0 0% 98%;
+    --gradient-card: none;
+    --shadow-glow: none;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Sidebar variables updated to match the grayscale theme */
+    --sidebar-background: 0 0% 10%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 0 0% 98%;
+    --sidebar-primary-foreground: 0 0% 9%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 0 0% 64%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
