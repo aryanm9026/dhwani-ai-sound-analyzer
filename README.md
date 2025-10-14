@@ -110,9 +110,3 @@ Make sure you have Node.js and npm installed on your machine.
 ## 📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-## 👤 Contact
-
-Aryan Mishra - [LinkedIn](https://www.linkedin.com/in/your-linkedin/) - your.email@example.com
-
-Project Link: [https://github.com/your-username/dhwani](https://github.com/your-username/dhwani)
