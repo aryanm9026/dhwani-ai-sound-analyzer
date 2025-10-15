@@ -64,26 +64,49 @@ const getGeminiAnalysis = async (base64Audio, mimeType, chatHistory = [], userQu
       body: JSON.stringify(payload)
     });
 
+    // --- 1. Handle non-successful responses first ---
     if (!response.ok) {
-      const errorBody = await response.json();
-      throw new Error(errorBody.error || `Request to backend failed with status ${response.status}`);
+      let errorMsg = `Request to backend failed with status ${response.status}`;
+      try {
+        // Try to parse the error response as JSON, as it might contain a specific message.
+        const errorBody = await response.json();
+        // Use the server's error message if it exists, otherwise stick with our default.
+        errorMsg = errorBody.error || errorMsg;
+      } catch (e) {
+        // This catch block runs if response.json() fails (e.g., empty or HTML response).
+        // The original errorMsg is the perfect fallback.
+        console.warn("Could not parse error response body as JSON.");
+      }
+      // Throw the error to be caught by the main catch block.
+      throw new Error(errorMsg);
     }
 
+    // --- 2. Handle the successful response ---
+    // If we get here, response.ok is true, and we can safely parse the body ONCE.
     const result = await response.json();
 
-    if (result.candidates && result.candidates.length > 0 && result.candidates[0].content?.parts?.[0]?.text) {
-      return result.candidates[0].content.parts[0].text;
-    } else {
-      const candidate = result.candidates?.[0];
-      if (candidate && candidate.finishReason !== 'STOP') {
-        return `Analysis stopped by the API. Reason: ${candidate.finishReason}.`;
-      }
-      return "Analysis could not be completed. The model did not return valid content.";
+    // --- 3. Safely access the nested result text ---
+    // Optional chaining (?.) prevents errors if any part of the chain is null or undefined.
+    const analysisText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (analysisText) {
+      return analysisText;
     }
+
+    // Handle cases where the analysis text is missing but there's a reason.
+    const finishReason = result?.candidates?.[0]?.finishReason;
+    if (finishReason && finishReason !== 'STOP') {
+      return `Analysis stopped by the API. Reason: ${finishReason}.`;
+    }
+
+    // Default message if no content and no specific finish reason.
+    return "Analysis could not be completed. The model did not return valid content.";
+
   } catch (error) {
     console.error("Failed to communicate with the backend server:", error);
     return `Error: Could not retrieve analysis. ${error.message}`;
   }
+
 };
 
 const Button = ({ children, onClick, variant = 'primary', className = '' }) => {
