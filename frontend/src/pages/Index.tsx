@@ -306,7 +306,7 @@ const InvestigatorChat = ({ onNewMessage, chatHistory, isThinking, initialAnalys
     <Card className="flex flex-col h-[500px]">
       <div className="flex items-center gap-3 mb-4">
         <MessageSquareIcon className="text-zinc-300" />
-        <h3 className="text-xl font-semibold text-zinc-100">Ask the Investigator, Felicia</h3>
+        <h3 className="text-xl font-semibold text-zinc-100">Ask the Investigator, Dhwani</h3>
       </div>
 
       <div ref={chatContainerRef} className="flex-1 overflow-y-auto space-y-4 mb-4 pr-2">
