@@ -37,7 +37,7 @@ const LoaderIcon = () => <Icon path="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6
 
 
 const getGeminiAnalysis = async (base64Audio, mimeType, chatHistory = [], userQuestion = null, initialAnalysis = null) => {
-  const backendUrl = 'http://localhost:3001/api/analyze';
+  const backendUrl = '/api/analyze';
 
   // Format chat history for the API - convert to Gemini format
   const formattedChatHistory = chatHistory.map(msg => ({

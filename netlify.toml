@@ -1,0 +1,23 @@
+# netlify.toml
+
+# Base build settings
+[build]
+  # This command installs dependencies and builds the frontend
+  command = "cd frontend && npm install && npm run build"
+  
+  # The directory where your serverless functions are located
+  functions = "backend/"
+  
+  # The directory that contains the built frontend site
+  publish = "frontend/dist/" # Or "frontend/build" depending on your setup
+
+# Environment variables for the frontend build
+[build.environment]
+  # Example for a Vite app
+  VITE_API_URL = "/api"
+
+# This rule rewrites API requests to your serverless function
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/server/:splat" # 'server' is the name of your file (server.js)
+  status = 200

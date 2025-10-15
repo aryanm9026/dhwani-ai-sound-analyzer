@@ -6,6 +6,9 @@ const fetch = require('node-fetch');
 
 const app = express();
 const PORT = 3001;
+const express = require('express');
+const serverless = require('serverless-http');
+
 
 app.use(cors({ origin: 'http://localhost:8080' }));
 app.use(express.json({ limit: '50mb' }));
@@ -86,6 +89,4 @@ const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+module.exports.handler = serverless(app);
