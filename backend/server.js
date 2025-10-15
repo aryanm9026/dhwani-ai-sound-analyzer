@@ -6,7 +6,6 @@ const fetch = require('node-fetch');
 
 const app = express();
 const PORT = 3001;
-const express = require('express');
 const serverless = require('serverless-http');
 
 
