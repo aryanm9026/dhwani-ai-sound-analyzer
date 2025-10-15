@@ -3,8 +3,7 @@
 # Base build settings
 [build]
   # This command installs dependencies and builds the frontend
-  command = "cd frontend && npm install && npm run build"
-  
+    command = "cd backend && npm install && cd ../frontend && npm install && npm run build"  
   # The directory where your serverless functions are located
   functions = "backend/"
   
